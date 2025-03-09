@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Burger Hut</title>
+  <meta property="og:title" content="BURGER HUT">
+  <meta property="og:description" content="EAT TASTY BURGERS!">
+  <meta property="og:image" content="https://www-webi.github.io/nr.com/burger6.jpg"> <!-- Update with the correct URL -->
+  <meta property="og:url" content="https://www-webi.github.io/nr.com/">
+  <style>
+    /* General Styles */
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    /* Header Styles */
+    header {
+      background-color: #CD5C5C;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .logo {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      border: 3px solid black;
+      overflow: hidden;
+    }
+
+    .logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Sidebar Styles */
+    .sidebar {
+      position: fixed;
+      top: 0;
+      right: -250px; /* Hide sidebar by default */
+      width: 250px;
+      height: 100%;
+      background-color: #f4f4f4;
+      box-shadow: -2px 0 4px rgba(0, 0, 0, 0.1);
+      transition: right 0.3s ease;
+      z-index: 1000;
+    }
+
+    .sidebar.active {
+      right: 0; /* Show sidebar */
+    }
+
+    .sidebar ul {
+      list-style-type: none;
+      padding: 20px;
+    }
+
+    .sidebar ul li {
+      margin: 20px 0;
+    }
+
+    .sidebar ul li a {
+      text-decoration: none;
+      color: #333;
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    .sidebar-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      font-size: 24px;
+      cursor: pointer;
+      z-index: 1001;
+    }
+
+    /* Background Image */
+    .hero {
+      background-image: url('burger-background.jpg'); /* Replace with your image */
+      background-size: cover;
+      background-position: center;
+      height: 300px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: 2rem;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+
+    /* Image Gallery */
+    .gallery {
+      display: flex;
+      justify-content: space-around;
+      padding: 20px;
+    }
+
+    .gallery img {
+      width: 30%;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      cursor: pointer;
+    }
+
+    /* Modal Styles */
+    .modal {
+      display: none; /* Hidden by default */
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal img {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 10px;
+    }
+
+    .close {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      color: white;
+      font-size: 30px;
+      cursor: pointer;
+    }
+
+    /* Footer Styles */
+    footer {
+      background-color: black;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    footer input[type="text"] {
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="logo">
+      <img src="logo.png" alt="Burger Hut Logo"> <!-- Add your logo image here -->
+    </div>
+  </header>
+
+  <!-- Sidebar Toggle Button -->
+  <div class="sidebar-toggle" onclick="toggleSidebar()">☰</div>
+
+  <!-- Sidebar -->
+  <div class="sidebar" id="sidebar">
+    <ul>
+      <li><a href="#menu">Menu</a></li>
+      <li><a href="#about">About Us</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+
+  <!-- Hero Section with Background Image -->
+  <div class="hero">
+    <h1>Welcome to Burger Hut</h1>
+  </div>
+
+  <!-- Image Gallery -->
+  <div class="gallery">
+    <img src="burger1.jpg" alt="Burger 1" onclick="openModal(this)"> <!-- Replace with your image -->
+    <img src="burger2.jpg" alt="Burger 2" onclick="openModal(this)"> <!-- Replace with your image -->
+    <img src="burger3.jpg" alt="Burger 3" onclick="openModal(this)"> <!-- Replace with your image -->
+  </div>
+
+  <!-- Burger Prices Section -->
+  <section style="display: flex; justify-content: center; align-items: center; padding: 20px; flex-wrap: nowrap;">
+    <div style="margin: 0 10px; text-align: center; font-family: 'Brush Script MT', cursive; font-size: 14px; color: grey; border: 2px solid green; border-radius: 5px; padding: 10px; box-shadow: 0 0 10px black;">
+      Burger 1: rs 150
+    </div>
+    <div style="margin: 0 10px; text-align: center; font-family: 'Brush Script MT', cursive; font-size: 14px; color: grey; border: 2px solid green; border-radius: 5px; padding: 10px; box-shadow: 0 0 10px black;">
+      Burger 2: rs 200
+    </div>
+    <div style="margin: 0 10px; text-align: center; font-family: 'Brush Script MT', cursive; font-size: 14px; color: grey; border: 2px solid green; border-radius: 5px; padding: 10px; box-shadow: 0 0 10px black;">
+      Burger 3: rs 350
+    </div>
+  </section>
+
+  <!-- Second Image Gallery -->
+  <div class="gallery">
+    <img src="burger4.jpg" alt="Burger 4" onclick="openModal(this)"> <!-- Replace with your image -->
+    <img src="burger5.jpg" alt="Burger 5" onclick="openModal(this)"> <!-- Replace with your image -->
+    <img src="burger6.jpg" alt="Burger 6" onclick="openModal(this)"> <!-- Replace with your image -->
+  </div>
+
+  <!-- Second Burger Prices Section -->
+  <section style="display: flex; justify-content: center; align-items: center; padding: 20px; flex-wrap: nowrap;">
+    <div style="margin: 0 10px; text-align: center; font-family: 'Brush Script MT', cursive; font-size: 14px; color: grey; border: 2px solid green; border-radius: 5px; padding: 10px; box-shadow: 0 0 10px black;">
+      Burger 4: rs 150
+    </div>
+    <div style="margin: 0 10px; text-align: center; font-family: 'Brush Script MT', cursive; font-size: 14px; color: grey; border: 2px solid green; border-radius: 5px; padding: 10px; box-shadow: 0 0 10px black;">
+      Burger 5: rs 200
+    </div>
+    <div style="margin: 0 10px; text-align: center; font-family: 'Brush Script MT', cursive; font-size: 14px; color: grey; border: 2px solid green; border-radius: 5px; padding: 10px; box-shadow: 0 0 10px black;">
+      Burger 6: rs 350
+    </div>
+  </section>
+
+  <!-- Modal for Enlarged Images -->
+  <div class="modal" id="imageModal" onclick="closeModal()">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <img id="modalImage" src="" alt="Enlarged Image">
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2023 Burger Hut. All rights reserved.</p>
+    <input type="text" placeholder="Enter your name">
+  </footer>
+
+  <script>
+    // Function to open the modal with the clicked image
+    function openModal(img) {
+      const modal = document.getElementById("imageModal");
+      const modalImg = document.getElementById("modalImage");
+      modalImg.src = img.src;
+      modal.style.display = "flex"; // Show the modal
+    }
+
+    // Function to close the modal
+    function closeModal() {
+      const modal = document.getElementById("imageModal");
+      modal.style.display = "none"; // Hide the modal
+    }
+
+    // Function to toggle the sidebar
+    function toggleSidebar() {
+      const sidebar = document.getElementById("sidebar");
+      sidebar.classList.toggle("active");
+    }
+  </script>
+</body>
+</html>
