@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Burger Hut Menu</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f4e3;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #8B0000;
+            color: white;
+            text-align: center;
+            padding: 1em 0;
+        }
+        .top-nav {
+            display: flex;
+            justify-content: center;
+            background-color: #f0c14b;
+            padding: 10px 20px;
+        }
+        .top-nav a {
+            color: #333;
+            text-decoration: none;
+            padding: 10px 20px;
+            font-weight: bold;
+        }
+        .top-nav a:hover {
+            background-color: #ddd;
+        }
+        .container {
+            padding: 20px;
+            text-align: center; /* Centering the menu items */
+        }
+        .category {
+            margin-bottom: 20px;
+            display: inline-block; /* Allow categories to stack horizontally */
+            text-align: left; /* Align items to the left */
+        }
+        .category h2 {
+            background-color: #8B0000;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .item {
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+        }
+        footer {
+            background-color: #8B0000;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            position: relative;
+        }
+        .feedback-form {
+            margin-top: 20px;
+        }
+        .confirmation {
+            display: none;
+            color: green;
+            margin-top: 10px;
+        }
+        @media (max-width: 600px) {
+            .top-nav {
+                flex-direction: column;
+                align-items: center;
+            }
+            .top-nav a {
+                padding: 10px;
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Burger Hut Menu</h1>
+    <div class="top-nav">
+        <a href="index.html">Home</a>
+        <a href="about.html">About Us</a>
+        <a href="contact.html">Contact</a>
+    </div>
+</header>
+
+<div class="container">
+    <div class="category" id="burgers">
+        <h2>Burgers</h2>
+        <div class="item">Classic Burger - $5.99</div>
+        <div class="item">Cheeseburger - $6.49</div>
+        <div class="item">Bacon Burger - $6.99</div>
+    </div>
+    <div class="category" id="sides">
+        <h2>Sides</h2>
+        <div class="item">French Fries - $2.49</div>
+        <div class="item">Onion Rings - $2.99</div>
+        <div class="item">Mozzarella Sticks - $3.49</div>
+    </div>
+    <div class="category" id="drinks">
+        <h2>Drinks</h2>
+        <div class="item">Soda - $1.99</div>
+        <div class="item">Milkshake - $3.99</div>
+        <div class="item">Water - $0.99</div>
+    </div>
+</div>
+
+<footer>
+    <h3>Feedback</h3>
+    <form class="feedback-form" onsubmit="return handleFeedback(event)">
+        <textarea rows="4" cols="30" placeholder="Your feedback..."></textarea><br>
+        <button type="submit">Submit</button>
+    </form>
+    <div class="confirmation" id="confirmation-message">Thanks for your feedback!</div>
+</footer>
+
+<script>
+    function handleFeedback(event) {
+        event.preventDefault(); // Prevent form submission
+        document.getElementById('confirmation-message').style.display = 'block';
+        event.target.reset(); // Reset the form
+        return false; // Prevent default form action
+    }
+</script>
+
+</body>
+</html>
